@@ -44,14 +44,12 @@ fun part2(input: List<String>): Int {
             counts+=currRotations
 
             absolutePos = diff.mod(100)
-            println("Value: $instructions, Current value: $absolutePos, Touched Zero: $currRotations")
 
         } else {
             val diff = absolutePos + currStep
             val currRotations = diff.floorDiv(100).absoluteValue
             counts+=currRotations
             absolutePos = diff.mod(100)
-            println("Value: $instructions, Current value: $absolutePos, TouchedZero: $currRotations")
 
         }
 
