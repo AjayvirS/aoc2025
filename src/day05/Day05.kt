@@ -15,21 +15,44 @@ fun part1(ranges: List<Pair<Long, Long>>, ids: List<Long>): Long {
             val currId = ids[count]
             if (currId >= currRange.first && currId <= currRange.second) {
                 totalValidIds += 1
-                count+=1
+                count += 1
                 break
             }
             if (currId > currRange.second) {
                 startIndex = i + 1
                 continue
-            }
-            else {
-                count+=1
+            } else {
+                count += 1
                 break
             }
         }
     }
 
     return totalValidIds
+
+}
+
+fun part2(ranges: List<Pair<Long, Long>>): Long {
+    val mergedRanges: MutableList<Pair<Long, Long>> = mutableListOf()
+    var currStart = ranges[0].first
+    var currEnd = ranges[0].second
+    for (i in 1..<ranges.size) {
+        val next = ranges[i]
+        val nextStart = next.first
+        val nextEnd = next.second
+
+        if (nextStart <= currEnd) {
+            if (nextEnd > currEnd) {
+                currEnd = nextEnd
+            }
+        } else {
+            mergedRanges.add(currStart to currEnd)
+            currStart = nextStart
+            currEnd = nextEnd
+        }
+    }
+    mergedRanges.add(currStart to currEnd)
+    return mergedRanges.sumOf { it.second - it.first + 1 }
 
 }
 
@@ -52,5 +75,6 @@ fun main() {
     }
     ids.sort()
     ranges.sortWith(compareBy({ it.first }, { it.second }))
-    println(part1(ranges as List<Pair<Long, Long>>, ids as List<Long>))
+    //println(part1(ranges as List<Pair<Long, Long>>, ids as List<Long>))
+    println(part2(ranges as List<Pair<Long, Long>>))
 }
