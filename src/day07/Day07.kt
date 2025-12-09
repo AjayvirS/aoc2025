@@ -16,7 +16,7 @@ fun part2(array: Array<Array<String>>): Long {
 fun splitBeam(array: Array<Array<String>>, currX: Int, currY: Int, memo: Array<LongArray>): Long {
 
     if(currY < 0 || currY > array[0].size - 1){
-        return 0
+        return 1
     }
     if(currX==array.size){
         return 1
